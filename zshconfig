@@ -1,0 +1,8 @@
+# active command not found package,
+# which suggests installing packages if a command was not found
+. /etc/zsh_command_not_found
+
+# acm is like g++, but with all flags needed for ACM
+acm() {
+    ulimit -s unlimited && g++-11 -std=c++23 -DLOCAL -ulimit -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector "$1" -lacm -o $(basename "$1" .cpp)
+}
