@@ -13,7 +13,7 @@ acm() {
         -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC \
         -D_FORTIFY_SOURCE=2 \
         -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector \
-        "$1" -lacm -o $(basename "$1" .cpp)
+        "$1" -o $(basename "$1" .cpp)
     }
 
 # Short command for all apt updates/upgrades.
