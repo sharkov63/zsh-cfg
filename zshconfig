@@ -6,15 +6,15 @@
 # Usage: "acm sol.cpp" (no need to specify "-o sol")
 acm() {
     ulimit -s unlimited && \
-        g++-11 -std=c++23 -DLOCAL -ulimit -O2 \
+        g++-11 -xc++ -std=c++23 -DLOCAL -ulimit -O2 \
         -Wall -Wextra -pedantic -Wshadow -Wformat=2 \
         -Wfloat-equal -Wconversion -Wlogical-op \
         -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align \
         -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC \
         -D_FORTIFY_SOURCE=2 \
         -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector \
-        "$1" -o $(basename "$1" .cpp)
-    }
+        "$1" -o "${1%.*}"
+}
 
 # Short command for all apt updates/upgrades.
 aptall() {
