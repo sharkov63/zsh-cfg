@@ -20,3 +20,6 @@ acm() {
 aptall() {
     sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove --purge -y
 }
+
+# Short command for "xclip -selection clipboard"
+alias -g xxclip="xclip -selection clipboard"
