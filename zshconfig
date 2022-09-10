@@ -6,12 +6,12 @@
 # Usage: "acm sol.cpp" (no need to specify "-o sol")
 acm() {
     ulimit -s unlimited && \
-        g++-11 -xc++ -std=c++23 -DLOCAL -ulimit -O2 \
+        clang++ -xc++ -std=gnu++2b -DLOCAL -ulimit -O2 \
         -Wall -Wextra -pedantic -Wshadow -Wformat=2 \
-        -Wfloat-equal -Wconversion -Wlogical-op \
-        -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align \
+        -Wfloat-equal -Wconversion \
+        -Wshift-overflow -Wcast-qual -Wcast-align \
         -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC \
-        -D_FORTIFY_SOURCE=2 \
+        -D_FORTIFY_SOURCE=2 -Wno-sign-conversion \
         -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector \
         "$1" -o "${1%.*}"
 }
@@ -21,5 +21,12 @@ aptall() {
     sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove --purge -y
 }
 
+# Copies data to clipboard.
 # Short command for "xclip -selection clipboard"
 alias -g xxclip="xclip -selection clipboard"
+
+# Opens a file/directory with xdg-open,
+# but doesn't print error messages in the terminal.
+quiet-open() {
+    xdg-open "$@" &> /dev/null
+}
