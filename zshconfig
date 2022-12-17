@@ -30,3 +30,24 @@ alias -g xxclip="xclip -selection clipboard"
 quiet-open() {
     xdg-open "$@" &> /dev/null
 }
+
+# git-settimes [-v]
+#
+# Set the times of a git working copy to the last commit time.
+#
+# Useful for large projects like LLVM: when we checkout back-and-forth
+# between branches, we can omit rebuilding the whole project.
+#
+# Source: https://gist.github.com/tstone2077/86529356dd120eb0e51f
+git-settimes() {
+    SAVE_IFS=$IFS
+    TIME=$(git log --pretty=format:%cd -n 1 --date=iso)
+    TIME=$(date -d "$TIME" +%Y%m%d%H%M.%S)
+    IFS=$(echo -en "\n\b")
+    GIT_FILES=( $(git ls-files) )
+    LEN=${#GIT_FILES}
+    for (( START_IDX=0; START_IDX<LEN; START_IDX+=30000 )); do
+        touch -m -t $TIME ${GIT_FILES[@]:$START_IDX:30000}
+    done
+    IFS=$SAVE_IFS
+}
