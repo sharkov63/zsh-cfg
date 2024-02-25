@@ -1,3 +1,5 @@
+#export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
 # Active command not found package,
 # which suggests installing packages if a command was not found
 . /etc/zsh_command_not_found
@@ -6,7 +8,7 @@
 # Usage: "acm sol.cpp" (no need to specify "-o sol")
 acm() {
     ulimit -s unlimited && \
-        clang++ -xc++ -std=gnu++2b -DLOCAL -ulimit -O2 \
+        g++ -g -xc++ -std=gnu++2b -DLOCAL -ulimit -O2 \
         -Wall -Wextra -pedantic -Wshadow -Wformat=2 \
         -Wfloat-equal -Wconversion \
         -Wshift-overflow -Wcast-qual -Wcast-align \
@@ -59,3 +61,4 @@ git-settimes() {
     done
     IFS=$SAVE_IFS
 }
+
